@@ -23,6 +23,10 @@
 #include <media/AudioSystem.h>
 #include <media/AudioTrack.h>
 
+#if __cplusplus < 201103L && !defined(__GXX_EXPERIMENTAL_CXX0X__) && !defined(constexpr)
+#define constexpr const
+#endif
+
 namespace android {
 
 class ToneGenerator {
@@ -301,9 +305,9 @@ private:
                 unsigned int command);
 
     private:
-        static const short GEN_AMP = 32000;  // amplitude of generator
-        static const short S_Q14 = 14;  // shift for Q14
-        static const short S_Q15 = 15;  // shift for Q15
+        static constexpr short GEN_AMP = 32000;  // amplitude of generator
+        static constexpr short S_Q14 = 14;  // shift for Q14
+        static constexpr short S_Q15 = 15;  // shift for Q15
 
         short mA1_Q14;  // Q14 coefficient
         // delay line of full amplitude generator
