@@ -17,15 +17,12 @@
 #ifndef ANDROID_TONEGENERATOR_H_
 #define ANDROID_TONEGENERATOR_H_
 
-#include <utils/RefBase.h>
-#include <utils/KeyedVector.h>
-#include <utils/threads.h>
 #include <media/AudioSystem.h>
 #include <media/AudioTrack.h>
-
-#if __cplusplus < 201103L && !defined(__GXX_EXPERIMENTAL_CXX0X__) && !defined(constexpr)
-#define constexpr const
-#endif
+#include <utils/Compat.h>
+#include <utils/KeyedVector.h>
+#include <utils/RefBase.h>
+#include <utils/threads.h>
 
 namespace android {
 
@@ -305,9 +302,9 @@ private:
                 unsigned int command);
 
     private:
-        static constexpr short GEN_AMP = 32000;  // amplitude of generator
-        static constexpr short S_Q14 = 14;  // shift for Q14
-        static constexpr short S_Q15 = 15;  // shift for Q15
+        static const short GEN_AMP = 32000;  // amplitude of generator
+        static const short S_Q14 = 14;  // shift for Q14
+        static const short S_Q15 = 15;  // shift for Q15
 
         short mA1_Q14;  // Q14 coefficient
         // delay line of full amplitude generator
