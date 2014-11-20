@@ -19,14 +19,12 @@
 
 #include <stdint.h>
 #include <sys/types.h>
+
 #include <cutils/compiler.h>
+#include <utils/Compat.h>
 
 #include <media/AudioBufferProvider.h>
 #include <system/audio.h>
-
-#if __cplusplus < 201103L && !defined(__GXX_EXPERIMENTAL_CXX0X__) && !defined(constexpr)
-#define constexpr const
-#endif
 
 namespace android {
 // ----------------------------------------------------------------------------
@@ -54,7 +52,7 @@ public:
 #endif
     };
 
-    static const float UNITY_GAIN_FLOAT = 1.0f;
+    static const CONSTEXPR float UNITY_GAIN_FLOAT = 1.0f;
 
     static AudioResampler* create(audio_format_t format, int inChannelCount,
             int32_t sampleRate, src_quality quality=DEFAULT_QUALITY);
@@ -88,13 +86,13 @@ public:
 
 protected:
     // number of bits for phase fraction - 30 bits allows nearly 2x downsampling
-    static constexpr int kNumPhaseBits = 30;
+    static const int kNumPhaseBits = 30;
 
     // phase mask for fraction
-    static constexpr uint32_t kPhaseMask = (1LU<<kNumPhaseBits)-1;
+    static const uint32_t kPhaseMask = (1LU<<kNumPhaseBits)-1;
 
     // multiplier to calculate fixed point phase increment
-    static constexpr double kPhaseMultiplier;
+    static const double kPhaseMultiplier;
 
     AudioResampler(int inChannelCount, int32_t sampleRate, src_quality quality);
 
